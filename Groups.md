@@ -8,8 +8,8 @@ When peers vote, they will not see who the group members are. They will only see
 ### ADD GROUP NAME HERE 
 
 ## Group Members
-1. Add name  - - Add Github username
-2. Add name  - - Add Github username
+1. Samyam Pandey  - - @Titanzz
+2. Alex Litchev  - - @alunity
 3. Add name  - - Add Github username
 
 ## Grading
