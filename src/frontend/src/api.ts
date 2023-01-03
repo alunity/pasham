@@ -23,7 +23,7 @@ async function getResponse(input: string): Promise<string> {
   } else if (typeof data == "string") {
     return data;
   } else {
-    return "-1";
+    return "NULL";
   }
 }
 

@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import getResponse from "./api";
 
 // @ts-ignore
 const SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
