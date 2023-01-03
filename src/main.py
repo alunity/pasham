@@ -26,6 +26,10 @@ app.mount("/pasham", StaticFiles(directory=static_dir, html=True), name="static"
 
 @app.get("/api/{query}")
 async def test(query):
+    query = query.replace("+", "%2B")
+
+    # %Z1 = / (epic encoding)
+    query = query.replace("%Z1", "/")
     data = json.dumps(scrape_google(query))
     return {data}
 
@@ -36,7 +40,6 @@ def start_server():
                 port=1002,
                 log_level="info",
                 reload=True
-
                 )
 
 

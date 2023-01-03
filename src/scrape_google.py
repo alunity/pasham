@@ -7,8 +7,7 @@ from selenium.common.exceptions import NoSuchElementException
 
 
 def scrape_google(query):
-    # query = "Mkhitarian"
-    x = "+".join(query.split(" "))
+    x = "%20".join(query.split(" "))
 
     options = Options()
     options.headless = True
@@ -84,7 +83,14 @@ def scrape_google(query):
     except NoSuchElementException:
         pass
 
-        # Featured search
+    # Math
+    try:
+        span = driver.find_element(By.CLASS_NAME, "qv3Wpe")
+        return span.text
+    except NoSuchElementException:
+        pass
+
+    # Featured search
     try:
         span = driver.find_element(By.CLASS_NAME, "hgKElc")
         return span.text
