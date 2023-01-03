@@ -10,10 +10,13 @@ const SpeechRecognitionEvent =
   // @ts-ignore
   window.SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 
-function Microphone() {
-  let [listening, setListening] = useState(false);
-  let [result, setResult] = useState("");
-  let [response, setResponse] = useState("");
+interface iProps {
+  callback: Function;
+  listening: boolean;
+  setListening: Function;
+}
+
+function Microphone(props: iProps) {
   let [recognition, setRecognition] = useState(new SpeechRecognition());
 
   useEffect(() => {
@@ -22,42 +25,27 @@ function Microphone() {
     recognition.lang = "en-US";
     recognition.interimResults = true;
 
-    if (listening === true) {
+    if (props.listening === true) {
       recognition.start();
-    } else if (listening === false) {
+    } else if (props.listening === false) {
       recognition.stop();
     }
 
     // @ts-ignore
     recognition.onresult = (event) => {
-      setResult(event.results[event.results.length - 1][0].transcript);
+      let final = false;
       if (event.results[event.results.length - 1].isFinal) {
-        setListening(false);
-        fetchResponse(event.results[event.results.length - 1][0].transcript);
+        props.setListening(false);
+        final = true;
       }
+      props.callback(
+        event.results[event.results.length - 1][0].transcript,
+        final
+      );
     };
+  }, [props.listening]);
 
-    // // @ts-ignore
-    // recognition.onspeechend = (event) => {
-    //   console.log(event);
-    // };
-  }, [listening]);
-
-  async function fetchResponse(query: string) {
-    if (query !== "") {
-      setResponse(await getResponse(query));
-    }
-  }
-
-  return (
-    <>
-      <p>{result}</p>
-      <button onClick={() => setListening(!listening)}>
-        {listening ? "Stop" : "Start"} listening
-      </button>
-      <p>{response}</p>
-    </>
-  );
+  return null;
 }
 
 export default Microphone;
