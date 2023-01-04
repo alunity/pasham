@@ -1,96 +1,96 @@
 [
-    {
-        "name": "Shakshuka",
-        "ingredients": [
-            "3 tbsp olive oil",
-            "2 large onions, thinly sliced",
-            "2 red peppers, cut into long slices",
-            "2 green peppers, cut into long slices",
-            "4 garlic cloves, finely chopped",
-            "½ tsp cumin seeds",
-            "½ tsp caraway seeds",
-            "½ tsp cayenne pepper",
-            "1 tbsp tomato or red pepper purée",
-            "2 x 400g tins tomatoes",
-            "1 small bunch fresh coriander, roughly chopped",
-            "1 small bunch fresh parsley, roughly chopped",
-            "8 free-range eggs",
-            "85g/3oz feta, crumbled",
-            "8 tbsp thick natural yoghurt or labneh",
-            "salt and freshly ground black pepper"
-            ],
-        "steps": [
-            "1. Heat the olive oil in a large, lidded frying pan. Add the onions and peppers and season with salt and pepper. Cook on a medium heat until just softened. Add the garlic and cook for a further 2 minutes. Sprinkle in the cumin and caraway seeds and the cayenne pepper. Stir in the tomato or red pepper purée and cook for a couple more minutes until the paste starts to separate. Add the tomatoes with a splash of water.",
-            "2. Simmer for 10 minutes, uncovered, until reduced a little. Taste after 5 minutes and add a little sugar if you think the tomatoes need it. Keep an eye on the texture – you don’t want it runny, but it mustn’t get too dry, either. Add another splash of water if necessary. When the sauce is reduced, stir in the herbs.",
-            "3. Make 8 small wells in the sauce. Break an egg into a cup and drop carefully into a well, repeat with the remaining eggs. Cook for a few more minutes until the whites are just set and the yolks are still runny. Sprinkle over the crumbled feta. Serve with yogurt or labneh on the side."
-        ]
-    },
-    {
-        "name": "Banana Bread",
-        "ingredients": [
-            "285g/10oz plain flour",
-            "1 tsp bicarbonate of soda",
-            "½ tsp salt",
-            "110g/4oz butter, plus extra for greasing",
-            "225g/8oz caster sugar",
-            "2 free-range eggs",
-            "4 ripe bananas, mashed",
-            "85ml/3fl oz buttermilk (or normal milk mixed with 1½ tsp lemon juice or vinegar)",
-            "1 tsp vanilla extract"
-        ],
-        "steps": [
-            "Preheat the oven to 180C/350F/Gas 4.",
-            "Sift the flour, bicarbonate of soda and salt into a large mixing bowl.",
-            "In a separate bowl, cream the butter and sugar together until light and fluffy.",
-            "Add the eggs, mashed bananas, buttermilk and vanilla extract to the butter and sugar mixture and mix well. Fold in the flour mixture.",
-            "Grease a 20cm x 12.5cm/8in x 5in loaf tin (2lb) and pour the banana bread mixture into the tin.",
-            "Transfer to the oven and bake for about an hour, or until well-risen and golden-brown.",
-            "Remove from the oven and cool in the tin for a few minutes, then turn out onto a wire rack to cool completely before serving."
-        ]
-    },
-    {
-        "name": "Perfect Chocoloate Chip Cookies",
-        "ingredients": [
-            "250g/9oz plain flour",
-            "½ tsp baking powder",
-            "½ tsp bicarbonate of soda",
-            "½ tsp sea salt flakes, plus extra for sprinkling",
-            "110g/3¾oz unsalted butter, diced and at room temperature",
-            "110g/3¾oz light brown sugar",
-            "110g/3¾oz caster sugar",
-            "1 large free-range egg",
-            "½ tsp vanilla extract",
-            "250g/9oz chocolate"
-            ],
-        "steps": [
-            "To make the cookie dough, whisk together the flour, baking powder, bicarbonate of soda and salt in a large bowl. Place the butter and sugars in a separate large bowl and, using an electric hand-held mixer, beat together for about 4–5 minutes until light. Add the egg, beating until fully combined, then briefly mix in the vanilla.",
-            "Add the flour mixture and mix just until a dough is formed. Add the chocolate and mix until evenly distributed.",
-            "Chill the dough for 24–48 hours before baking. This process helps the flour to hydrate and makes for a better tasting cookie that is more likely to caramelise as it bakes. You can skip this process but the dough will still need refrigerating for a few hours so that it can be rolled into balls and will bake without spreading too much.",
-            "Preheat the oven to 180C/160C Fan/Gas 4 and line two baking trays with baking paper. Use your hands or an ice cream scoop to form balls of dough (about 60–70g/2¼–2½oz per cookie). Sprinkle with a little sea salt and place onto the prepared baking trays, leaving 2.5–5cm/1–2in between each cookie.",
-            "Bake, in batches of six, for about 16–18 minutes or until golden around the edges but still slightly pale in the middle. Leave to cool for a few minutes before transferring to a wire rack to cool completely. Serve immediately or keep in a sealed container for up to 4 days."
-        ]
-    },
-    {
-        "name": "Easy slow cooker spaghetti Bolognese",
-        "ingredients": [
-            "500g/1lb 2oz beef mince",
-            "1 medium onion, finely chopped",
-            "2 garlic cloves, crushed",
-            "200g/7oz mushrooms, any kind, sliced",
-            "400g tin chopped tomatoes",
-            "275ml/9½fl oz hot beef stock, made with 1 beef stock cube",
-            "3 tbsp tomato purée",
-            "1 tsp dried oregano",
-            "2 dried bay leaves, or 1 fresh",
-            "salt and freshly ground black pepper",
-            "freshly cooked spaghetti, grated cheese and basil, to serve"
-            ],
-        "steps": [
-            "Put the mince and onion in a large non-stick frying pan and fry together over a medium–high heat for about 4 minutes, stirring and squishing against the side of the pan with a couple of wooden spoons to break up the mince as much as possible.",
-            "Add the garlic and cook for 1 minute more.",
-            "Tip the mince and onions into the slow cooker and add the mushrooms, tomatoes, stock, tomato purée and herbs. Season with salt and lots of freshly ground black pepper.",
-            "Cover the slow cooker with its lid and cook on high for 4–5 hours or low for 6–8 hours.",
-            "When ready, serve the Bolognese sauce with freshly cooked spaghetti, some grated cheese and basil, if you like."
-        ]
-    }
+  {
+    "name": "Shakshuka",
+    "ingredients": [
+      "3 tbsp olive oil",
+      "2 large onions, thinly sliced",
+      "2 red peppers, cut into long slices",
+      "2 green peppers, cut into long slices",
+      "4 garlic cloves, finely chopped",
+      "½ tsp cumin seeds",
+      "½ tsp caraway seeds",
+      "½ tsp cayenne pepper",
+      "1 tbsp tomato or red pepper purée",
+      "2 x 400g tins tomatoes",
+      "1 small bunch fresh coriander, roughly chopped",
+      "1 small bunch fresh parsley, roughly chopped",
+      "8 free-range eggs",
+      "85g/3oz feta, crumbled",
+      "8 tbsp thick natural yoghurt or labneh",
+      "salt and freshly ground black pepper"
+    ],
+    "steps": [
+      "1. Heat the olive oil in a large, lidded frying pan. Add the onions and peppers and season with salt and pepper. Cook on a medium heat until just softened. Add the garlic and cook for a further 2 minutes. Sprinkle in the cumin and caraway seeds and the cayenne pepper. Stir in the tomato or red pepper purée and cook for a couple more minutes until the paste starts to separate. Add the tomatoes with a splash of water.",
+      "2. Simmer for 10 minutes, uncovered, until reduced a little. Taste after 5 minutes and add a little sugar if you think the tomatoes need it. Keep an eye on the texture - you don't want it runny, but it mustn't get too dry, either. Add another splash of water if necessary. When the sauce is reduced, stir in the herbs.",
+      "3. Make 8 small wells in the sauce. Break an egg into a cup and drop carefully into a well, repeat with the remaining eggs. Cook for a few more minutes until the whites are just set and the yolks are still runny. Sprinkle over the crumbled feta. Serve with yogurt or labneh on the side."
+    ]
+  },
+  {
+    "name": "Banana Bread",
+    "ingredients": [
+      "285g/10oz plain flour",
+      "1 tsp bicarbonate of soda",
+      "½ tsp salt",
+      "110g/4oz butter, plus extra for greasing",
+      "225g/8oz caster sugar",
+      "2 free-range eggs",
+      "4 ripe bananas, mashed",
+      "85ml/3fl oz buttermilk (or normal milk mixed with 1½ tsp lemon juice or vinegar)",
+      "1 tsp vanilla extract"
+    ],
+    "steps": [
+      "Preheat the oven to 180C/350F/Gas 4.",
+      "Sift the flour, bicarbonate of soda and salt into a large mixing bowl.",
+      "In a separate bowl, cream the butter and sugar together until light and fluffy.",
+      "Add the eggs, mashed bananas, buttermilk and vanilla extract to the butter and sugar mixture and mix well. Fold in the flour mixture.",
+      "Grease a 20cm x 12.5cm/8in x 5in loaf tin (2lb) and pour the banana bread mixture into the tin.",
+      "Transfer to the oven and bake for about an hour, or until well-risen and golden-brown.",
+      "Remove from the oven and cool in the tin for a few minutes, then turn out onto a wire rack to cool completely before serving."
+    ]
+  },
+  {
+    "name": "Perfect Chocoloate Chip Cookies",
+    "ingredients": [
+      "250g/9oz plain flour",
+      "½ tsp baking powder",
+      "½ tsp bicarbonate of soda",
+      "½ tsp sea salt flakes, plus extra for sprinkling",
+      "110g/3¾oz unsalted butter, diced and at room temperature",
+      "110g/3¾oz light brown sugar",
+      "110g/3¾oz caster sugar",
+      "1 large free-range egg",
+      "½ tsp vanilla extract",
+      "250g/9oz chocolate"
+    ],
+    "steps": [
+      "To make the cookie dough, whisk together the flour, baking powder, bicarbonate of soda and salt in a large bowl. Place the butter and sugars in a separate large bowl and, using an electric hand-held mixer, beat together for about 4-5 minutes until light. Add the egg, beating until fully combined, then briefly mix in the vanilla.",
+      "Add the flour mixture and mix just until a dough is formed. Add the chocolate and mix until evenly distributed.",
+      "Chill the dough for 24-48 hours before baking. This process helps the flour to hydrate and makes for a better tasting cookie that is more likely to caramelise as it bakes. You can skip this process but the dough will still need refrigerating for a few hours so that it can be rolled into balls and will bake without spreading too much.",
+      "Preheat the oven to 180C/160C Fan/Gas 4 and line two baking trays with baking paper. Use your hands or an ice cream scoop to form balls of dough (about 60-70g/2¼-2½oz per cookie). Sprinkle with a little sea salt and place onto the prepared baking trays, leaving 2.5-5cm/1-2in between each cookie.",
+      "Bake, in batches of six, for about 16-18 minutes or until golden around the edges but still slightly pale in the middle. Leave to cool for a few minutes before transferring to a wire rack to cool completely. Serve immediately or keep in a sealed container for up to 4 days."
+    ]
+  },
+  {
+    "name": "Easy slow cooker spaghetti Bolognese",
+    "ingredients": [
+      "500g/1lb 2oz beef mince",
+      "1 medium onion, finely chopped",
+      "2 garlic cloves, crushed",
+      "200g/7oz mushrooms, any kind, sliced",
+      "400g tin chopped tomatoes",
+      "275ml/9½fl oz hot beef stock, made with 1 beef stock cube",
+      "3 tbsp tomato purée",
+      "1 tsp dried oregano",
+      "2 dried bay leaves, or 1 fresh",
+      "salt and freshly ground black pepper",
+      "freshly cooked spaghetti, grated cheese and basil, to serve"
+    ],
+    "steps": [
+      "Put the mince and onion in a large non-stick frying pan and fry together over a medium-high heat for about 4 minutes, stirring and squishing against the side of the pan with a couple of wooden spoons to break up the mince as much as possible.",
+      "Add the garlic and cook for 1 minute more.",
+      "Tip the mince and onions into the slow cooker and add the mushrooms, tomatoes, stock, tomato purée and herbs. Season with salt and lots of freshly ground black pepper.",
+      "Cover the slow cooker with its lid and cook on high for 4-5 hours or low for 6-8 hours.",
+      "When ready, serve the Bolognese sauce with freshly cooked spaghetti, some grated cheese and basil, if you like."
+    ]
+  }
 ]
