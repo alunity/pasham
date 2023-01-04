@@ -37,6 +37,9 @@ async function getRecipe() {
   for (let i = 0; i < data.steps.length; i++) {
     output += `${i + 1}. ` + data.steps[i] + "\n";
   }
+  output += "%AA" + "Enjoy!";
+  output = output.replaceAll("Â", "");
+
   return output;
 }
 
