@@ -33,7 +33,7 @@ function AlwaysListening(props: iProps) {
 
     // @ts-ignore
     recognition.onresult = (event) => {
-      console.log(event.results[event.results.length - 1][0].transcript);
+      // console.log(event.results[event.results.length - 1][0].transcript);
       for (let i = 0; i < keywords.length; i++) {
         if (
           event.results[event.results.length - 1][0].transcript
@@ -54,8 +54,8 @@ function AlwaysListening(props: iProps) {
 
     window.onfocus = () => {
       if (!listening.current && !props.listeningForOtherInput) {
-        recognition.start();
         listening.current = true;
+        recognition.start();
       }
     };
 

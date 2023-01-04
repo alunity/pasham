@@ -4,6 +4,8 @@ import getResponse from "./api";
 import "./App.css";
 import Microphone from "./speechRecognition";
 
+const synth = window.speechSynthesis;
+
 function App() {
   let [listening, setListening] = useState(false);
   // False -> Listening for keywords (hey pasham)
@@ -33,6 +35,10 @@ function App() {
 
   useEffect(() => {
     if (response != "") {
+      let utterance = new SpeechSynthesisUtterance(response);
+      synth.cancel();
+      synth.speak(utterance);
+
       if (history === undefined) {
         setHistory([{ text: response, user: false }]);
       } else {
@@ -40,8 +46,6 @@ function App() {
       }
     }
   }, [response]);
-
-  console.log(history);
 
   async function fetchResponse(query: string) {
     if (query !== "") {
@@ -54,24 +58,42 @@ function App() {
   }
 
   return (
-    <div>
-      <h1>Pasham</h1>
-      <Microphone
-        callback={(text: string, final: boolean) =>
-          handleSpeechInput(text, final)
-        }
-        listening={listening}
-        setListening={(value: boolean) => setListening(value)}
-      />
-      <p>{speechInput}</p>
-      <button onClick={() => setListening(!listening)}>
-        {listening ? "Stop" : "Start"} listening
-      </button>
-      <p>{response}</p>
-      <AlwaysListening
-        listeningForOtherInput={listening}
-        callback={() => handleKeyWord()}
-      />
+    <div className="center container">
+      <div className="row">
+        <h1 className="gotham-bold">PASHAM</h1>
+        <Microphone
+          callback={(text: string, final: boolean) =>
+            handleSpeechInput(text, final)
+          }
+          listening={listening}
+          setListening={(value: boolean) => setListening(value)}
+        />
+        <p>{speechInput}</p>
+        <button className="" onClick={() => setListening(!listening)}>
+          {listening ? "Stop" : "Start"} listening
+        </button>
+        <p>{response}</p>
+        <AlwaysListening
+          listeningForOtherInput={listening}
+          callback={() => handleKeyWord()}
+        />
+      </div>
+      <div className="row">
+        <div className="col"></div>
+        <div className="col">
+          <div className="left p-3 card colour1">
+            <p className="">{speechInput}</p>
+          </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col">
+          <div className="left p-2 card colour4">
+            <p className="">{response}</p>
+          </div>
+        </div>
+        <div className="col"></div>
+      </div>
     </div>
   );
 }

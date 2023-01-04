@@ -1,6 +1,53 @@
 body {
-  background-color: #371e30;
-  color: white;
-  font-family: Arial, Helvetica, sans-serif;
+  color: white !important;
+  /* background-color: #1b1f3b !important; */
+  background-color: hsl(238, 63%, 34%) !important;
+  /* font-family: Arial, Helvetica, sans-serif; */
+  /* display: flex; */
   /* gotham bold */
+}
+
+.gotham-bold {
+  font-family: "Gotham Bold", sans-serif;
+}
+
+.black-text {
+  color: black;
+}
+
+.center {
+  text-align: center;
+}
+
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+
+.colour1 {
+  /* color: #f59ca9; */
+  background-color: #575bdd !important;
+}
+
+.colour2 {
+  /* color: #f6828c; */
+  /* background-color: #1b1f3b !important; */
+  background-color: #2596be !important;
+}
+
+.colour3 {
+  /* color: #df57bc; */
+  background-color: #b14aed !important;
+}
+
+.colour4 {
+  /* color: #a03e99; */
+  background-color: #c874d9 !important;
+}
+
+.colour5 {
+  /* color: #371e30; */
+  background-color: #e1bbc9 !important;
 }
