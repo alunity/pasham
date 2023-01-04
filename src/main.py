@@ -8,6 +8,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 import os
+from grab_recipe import getRandomRecipe
 
 
 app = FastAPI()
@@ -24,14 +25,19 @@ static_dir = os.path.join(os.path.dirname(__file__), "static")
 app.mount("/pasham", StaticFiles(directory=static_dir, html=True), name="static")
 
 
-@app.get("/api/{query}")
-async def test(query):
+@app.get("/api/google/{query}")
+async def google(query):
     query = query.replace("+", "%2B")
 
     # %Z1 = / (epic encoding)
     query = query.replace("%Z1", "/")
     data = json.dumps(scrape_google(query))
     return {data}
+
+
+@app.get("/api/recipe/")
+async def recipe():
+    return json.dumps(getRandomRecipe())
 
 
 def start_server():

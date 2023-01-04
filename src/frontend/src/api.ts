@@ -6,7 +6,7 @@ async function googleScrape(query: string) {
   let ending = query.replace("/", "%Z1");
   ending = encodeURIComponent(ending);
   // ending = ending.replace("/", "%2F");
-  let response = await fetch("http://127.0.0.1:1002/api/" + ending);
+  let response = await fetch("http://127.0.0.1:1002/api/google/" + ending);
   response = JSON.parse(await response.json());
 
   return response;
@@ -20,7 +20,25 @@ async function getJoke() {
   return data.setup + "%AA" + data.punchline;
 }
 
-getWeather();
+async function getRecipe() {
+  let response = await fetch("http://127.0.0.1:1002/api/recipe/");
+  let data = JSON.parse(await response.json());
+
+  let output = `This is the recipe for ${data.name}`;
+  // output +=
+  // "%AA" + `The ingredients necessary are ${data.ingredients.join(",")}`;
+  output += "%AA" + "You will need the following ingredients:" + "\n";
+
+  for (let i = 0; i < data.ingredients.length; i++) {
+    output += "- " + data.ingredients[i] + "\n";
+  }
+
+  output += "%AA" + "Here are the steps you need to follow:" + "\n";
+  for (let i = 0; i < data.steps.length; i++) {
+    output += `${i + 1}. ` + data.steps[i] + "\n";
+  }
+  return output;
+}
 
 async function getWeather() {
   let response = await fetch(
@@ -71,6 +89,10 @@ async function getResponse(input: string): Promise<string> {
   }
   if (input.includes("weather")) {
     return await getWeather();
+  }
+
+  if (input.includes("recipe")) {
+    return await getRecipe();
   }
 
   let data = await googleScrape(input);

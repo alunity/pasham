@@ -5,15 +5,6 @@ import "./App.css";
 import Microphone from "./speechRecognition";
 
 const synth = window.speechSynthesis;
-const voices = synth.getVoices();
-let selectedVoice = voices[0];
-
-for (let i = 0; i < voices.length; i++) {
-  if (voices[i].localService) {
-    selectedVoice = voices[i];
-    break;
-  }
-}
 
 function App() {
   let [listening, setListening] = useState(false);
@@ -31,6 +22,10 @@ function App() {
   let [response, setResponse] = useState("");
 
   let [loading, setLoading] = useState(false);
+
+  let [voices, setVoices] = useState(synth.getVoices());
+
+  let selectedVoice = voices[0];
 
   function handleSpeechInput(text: string, final: boolean) {
     window.scrollTo(0, document.body.scrollHeight);
@@ -65,9 +60,12 @@ function App() {
         utterance.voice = selectedVoice;
         synth.speak(utterance);
 
-        // 2Words/s
+        // 2Words per s
+        // 2 words ~ 10 characters
 
-        let timeToSay = (response.split("%AA").length / 2) * 2000 + 500;
+        let timeToSay =
+          (response.split("%AA")[0].replace(/\s/g, "").length / 10) * 1000 +
+          500;
 
         if (history === undefined) {
           setHistory([{ text: response.split("%AA")[0], user: false }]);
@@ -109,6 +107,15 @@ function App() {
     }
   }, [loading]);
 
+  useEffect(() => {
+    for (let i = 0; i < voices.length; i++) {
+      if (voices[i].localService) {
+        selectedVoice = voices[i];
+        break;
+      }
+    }
+  }, [voices]);
+
   async function fetchResponse(query: string) {
     if (query !== "") {
       setResponse(await getResponse(query));
@@ -124,10 +131,10 @@ function App() {
 
     if (x.user) {
       return (
-        <div className={"row"} key={i}>
+        <div className="row" key={i}>
           <div className="col"></div>
           <div className="col">
-            <div className="left p-3 mt-1 card colour1">
+            <div className="left p-3 mt-1 card colour1 prewrap">
               <p className="">{x.text}</p>
             </div>
           </div>
@@ -137,7 +144,7 @@ function App() {
       return (
         <div className="row" key={i}>
           <div className="col">
-            <div className="left p-3 mt-1 card colour4">
+            <div className="left p-3 mt-1 card colour4 prewrap">
               <p className="">{x.text}</p>
             </div>
           </div>

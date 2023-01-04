@@ -7,6 +7,10 @@ body {
   /* gotham bold */
 }
 
+.prewrap {
+  white-space: pre-wrap;
+}
+
 .gotham-bold {
   font-family: "Gotham Bold", sans-serif;
 }
