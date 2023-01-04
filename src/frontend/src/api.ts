@@ -12,7 +12,19 @@ async function googleScrape(query: string) {
   return response;
 }
 
+async function getJoke() {
+  let response = await fetch(
+    "https://official-joke-api.appspot.com/random_joke"
+  );
+  let data = await response.json();
+  return data.setup + "%AA" + data.punchline;
+}
+
 async function getResponse(input: string): Promise<string> {
+  if (input.includes("joke")) {
+    return await getJoke();
+  }
+
   let data = await googleScrape(input);
 
   if (Array.isArray(data)) {

@@ -50,18 +50,41 @@ function App() {
 
   useEffect(() => {
     if (response != "") {
-      window.scrollTo(0, document.body.scrollHeight);
-      let utterance = new SpeechSynthesisUtterance(response);
-      utterance.voice = selectedVoice;
-      synth.speak(utterance);
-      setLoading(false);
+      if (response.includes("%AA")) {
+        window.scrollTo(0, document.body.scrollHeight);
+        let utterance = new SpeechSynthesisUtterance(response.split("%AA")[0]);
+        utterance.voice = selectedVoice;
+        synth.speak(utterance);
 
-      if (history === undefined) {
-        setHistory([{ text: response, user: false }]);
+        // 2W/s
+
+        let timeToSay = (response.split("%AA").length / 2) * 2000 + 500;
+
+        if (history === undefined) {
+          setHistory([{ text: response.split("%AA")[0], user: false }]);
+        } else {
+          setHistory([
+            ...history,
+            { text: response.split("%AA")[0], user: false },
+          ]);
+        }
+        setTimeout(() => {
+          setResponse(response.split("%AA").slice(1).join("%AA"));
+        }, timeToSay);
       } else {
-        setHistory([...history, { text: response, user: false }]);
+        window.scrollTo(0, document.body.scrollHeight);
+        let utterance = new SpeechSynthesisUtterance(response);
+        utterance.voice = selectedVoice;
+        synth.speak(utterance);
+        setLoading(false);
+
+        if (history === undefined) {
+          setHistory([{ text: response, user: false }]);
+        } else {
+          setHistory([...history, { text: response, user: false }]);
+        }
+        setResponse("");
       }
-      setResponse("");
     }
   }, [response]);
 
@@ -95,7 +118,7 @@ function App() {
         <div className={"row"} key={i}>
           <div className="col"></div>
           <div className="col">
-            <div className="left p-3 card colour1">
+            <div className="left p-3 mt-1 card colour1">
               <p className="">{x.text}</p>
             </div>
           </div>
@@ -105,7 +128,7 @@ function App() {
       return (
         <div className="row" key={i}>
           <div className="col">
-            <div className="left p-3 card colour4">
+            <div className="left p-3 mt-1 card colour4">
               <p className="">{x.text}</p>
             </div>
           </div>
@@ -116,7 +139,7 @@ function App() {
   });
 
   return (
-    <div className="center container noScrollbar">
+    <div className="container-sm center noScrollbar">
       <div className="row fixedPosition pt-3 colour0">
         <h1 className="gotham-bold">PASHAM</h1>
         <Microphone
@@ -137,14 +160,14 @@ function App() {
         <div className={"row " + (listening ? "fadeIn" : "hidden disappear")}>
           <div className="col"></div>
           <div className="col">
-            <div className="left p-3 card colour1">
+            <div className="left p-3 mt-1 card colour1">
               <p className="">{speechInput}</p>
             </div>
           </div>
         </div>
         <div className={"row " + (loading ? "fadeIn" : "hidden disappear")}>
           <div className="col">
-            <div className="left p-3 card colour4">
+            <div className="left p-3 card mt-1 colour4">
               <p className="card-text placeholder-glow">
                 <span className="placeholder col-7"></span>
                 <span className="placeholder col-4"></span>
