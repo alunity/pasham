@@ -5,6 +5,15 @@ import "./App.css";
 import Microphone from "./speechRecognition";
 
 const synth = window.speechSynthesis;
+const voices = synth.getVoices();
+let selectedVoice = voices[0];
+
+for (let i = 0; i < voices.length; i++) {
+  if (voices[i].localService) {
+    selectedVoice = voices[i];
+    break;
+  }
+}
 
 function App() {
   let [listening, setListening] = useState(false);
@@ -21,31 +30,44 @@ function App() {
   let [speechInput, setSpeechInput] = useState("");
   let [response, setResponse] = useState("");
 
+  let [loading, setLoading] = useState(false);
+
   function handleSpeechInput(text: string, final: boolean) {
-    setSpeechInput(text);
     if (final) {
+      setSpeechInput("");
       if (history === undefined) {
         setHistory([{ text: text, user: true }]);
       } else {
         setHistory([...history, { text: text, user: true }]);
       }
+      setLoading(true);
       fetchResponse(text);
+    } else {
+      setSpeechInput(text);
     }
   }
 
   useEffect(() => {
     if (response != "") {
       let utterance = new SpeechSynthesisUtterance(response);
-      synth.cancel();
+      utterance.voice = selectedVoice;
       synth.speak(utterance);
+      setLoading(false);
 
       if (history === undefined) {
         setHistory([{ text: response, user: false }]);
       } else {
         setHistory([...history, { text: response, user: false }]);
       }
+      setResponse("");
     }
   }, [response]);
+
+  useEffect(() => {
+    if (listening) {
+      synth.cancel();
+    }
+  }, [listening]);
 
   async function fetchResponse(query: string) {
     if (query !== "") {
@@ -57,8 +79,36 @@ function App() {
     setListening(true);
   }
 
+  let bubbles = history?.map((x, i) => {
+    let classx = "";
+
+    if (x.user) {
+      return (
+        <div className={"row"} key={i}>
+          <div className="col"></div>
+          <div className="col">
+            <div className="left p-3 card colour1">
+              <p className="">{x.text}</p>
+            </div>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="row" key={i}>
+          <div className="col">
+            <div className="left p-3 card colour4">
+              <p className="">{x.text}</p>
+            </div>
+          </div>
+          <div className="col"></div>
+        </div>
+      );
+    }
+  });
+
   return (
-    <div className="center container">
+    <div className="center container fadeIn">
       <div className="row">
         <h1 className="gotham-bold">PASHAM</h1>
         <Microphone
@@ -68,32 +118,47 @@ function App() {
           listening={listening}
           setListening={(value: boolean) => setListening(value)}
         />
-        <p>{speechInput}</p>
-        <button className="" onClick={() => setListening(!listening)}>
-          {listening ? "Stop" : "Start"} listening
-        </button>
-        <p>{response}</p>
+
         <AlwaysListening
           listeningForOtherInput={listening}
           callback={() => handleKeyWord()}
         />
       </div>
-      <div className="row">
-        <div className="col"></div>
-        <div className="col">
-          <div className="left p-3 card colour1">
-            <p className="">{speechInput}</p>
+      <div className="scroll">
+        {bubbles}
+        <div className={"row " + (listening ? "fadeIn" : "hidden disappear")}>
+          <div className="col"></div>
+          <div className="col">
+            <div className="left p-3 card colour1">
+              <p className="">{speechInput}</p>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="row">
-        <div className="col">
-          <div className="left p-2 card colour4">
-            <p className="">{response}</p>
+        <div className={"row " + (loading ? "fadeIn" : "hidden disappear")}>
+          <div className="col">
+            <div className="left p-3 card colour4">
+              <p className="card-text placeholder-glow">
+                <span className="placeholder col-7"></span>
+                <span className="placeholder col-4"></span>
+                <span className="placeholder col-4"></span>
+                <span className="placeholder col-6"></span>
+                <span className="placeholder col-8"></span>
+              </p>
+            </div>
           </div>
+          <div className="col"></div>
         </div>
-        <div className="col"></div>
       </div>
+      <div className="position-relative bottom-0 start-50 translate-middle-x p-5">
+        {/* <button className="" onClick={() => setListening(!listening)}>
+          {listening ? "Stop" : "Start"} listening
+        </button> */}
+      </div>
+
+      <i
+        className={"gg-mic bottom-left" + (listening ? " mic-active" : "")}
+        onClick={() => setListening(!listening)}
+      ></i>
     </div>
   );
 }
