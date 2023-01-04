@@ -48,15 +48,24 @@ function App() {
     }
   }
 
+  function removeEmojis(input: string) {
+    return input.replace(
+      /([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g,
+      ""
+    );
+  }
+
   useEffect(() => {
     if (response != "") {
       if (response.includes("%AA")) {
         window.scrollTo(0, document.body.scrollHeight);
-        let utterance = new SpeechSynthesisUtterance(response.split("%AA")[0]);
+        let utterance = new SpeechSynthesisUtterance(
+          removeEmojis(response.split("%AA")[0])
+        );
         utterance.voice = selectedVoice;
         synth.speak(utterance);
 
-        // 2W/s
+        // 2Words/s
 
         let timeToSay = (response.split("%AA").length / 2) * 2000 + 500;
 
@@ -73,7 +82,7 @@ function App() {
         }, timeToSay);
       } else {
         window.scrollTo(0, document.body.scrollHeight);
-        let utterance = new SpeechSynthesisUtterance(response);
+        let utterance = new SpeechSynthesisUtterance(removeEmojis(response));
         utterance.voice = selectedVoice;
         synth.speak(utterance);
         setLoading(false);
