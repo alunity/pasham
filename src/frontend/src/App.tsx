@@ -33,6 +33,7 @@ function App() {
   let [loading, setLoading] = useState(false);
 
   function handleSpeechInput(text: string, final: boolean) {
+    window.scrollTo(0, document.body.scrollHeight);
     if (final) {
       setSpeechInput("");
       if (history === undefined) {
@@ -49,6 +50,7 @@ function App() {
 
   useEffect(() => {
     if (response != "") {
+      window.scrollTo(0, document.body.scrollHeight);
       let utterance = new SpeechSynthesisUtterance(response);
       utterance.voice = selectedVoice;
       synth.speak(utterance);
@@ -68,6 +70,12 @@ function App() {
       synth.cancel();
     }
   }, [listening]);
+
+  useEffect(() => {
+    if (loading) {
+      window.scrollTo(0, document.body.scrollHeight);
+    }
+  }, [loading]);
 
   async function fetchResponse(query: string) {
     if (query !== "") {
@@ -108,8 +116,8 @@ function App() {
   });
 
   return (
-    <div className="center container fadeIn">
-      <div className="row">
+    <div className="center container noScrollbar">
+      <div className="row fixedPosition pt-3 colour0">
         <h1 className="gotham-bold">PASHAM</h1>
         <Microphone
           callback={(text: string, final: boolean) =>
@@ -120,11 +128,11 @@ function App() {
         />
 
         <AlwaysListening
-          listeningForOtherInput={listening}
+          listeningForOtherInput={loading ? false : listening}
           callback={() => handleKeyWord()}
         />
       </div>
-      <div className="scroll">
+      <div className="scroll offset">
         {bubbles}
         <div className={"row " + (listening ? "fadeIn" : "hidden disappear")}>
           <div className="col"></div>
@@ -149,15 +157,9 @@ function App() {
           <div className="col"></div>
         </div>
       </div>
-      <div className="position-relative bottom-0 start-50 translate-middle-x p-5">
-        {/* <button className="" onClick={() => setListening(!listening)}>
-          {listening ? "Stop" : "Start"} listening
-        </button> */}
-      </div>
-
       <i
         className={"gg-mic bottom-left" + (listening ? " mic-active" : "")}
-        onClick={() => setListening(!listening)}
+        onClick={() => setListening(loading ? false : !listening)}
       ></i>
     </div>
   );
