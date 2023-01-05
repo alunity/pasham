@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import Settings from "./setting";
 import Microphone from "./speechRecognition";
+import StartUp from "./startup";
 
 const synth = window.speechSynthesis;
 
@@ -39,6 +40,8 @@ function App() {
   }
 
   let [settingsOpen, setSettingsOpen] = useState(false);
+
+  let [firstInteraction, setFirstInteraction] = useState(false);
 
   function handleSpeechInput(text: string, final: boolean) {
     window.scrollTo(0, document.body.scrollHeight);
@@ -247,6 +250,11 @@ function App() {
           setIsAlwaysListeningAllowed(value)
         }
       />
+      {!firstInteraction && (
+        <StartUp
+          setFirstInteraction={(value: boolean) => setFirstInteraction(value)}
+        />
+      )}
     </div>
   );
 }
