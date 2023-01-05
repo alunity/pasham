@@ -106,7 +106,7 @@ async function getWeather() {
   }
 }
 
-async function translate(text: string, intoLanguage: string) {
+async function translate(text: string, intoLanguage: string): Promise<string> {
   try {
     let response = await fetch(`http://127.0.0.1:1002/api/translate/`, {
       body: JSON.stringify({ text: text, lang: intoLanguage }),
@@ -140,7 +140,17 @@ async function getResponse(input: string, lang: string): Promise<string> {
   if (translatedInput.includes("recipe")) {
     return await translate(await getRecipe(), lang);
   }
-
+  if (
+    translatedInput.toLocaleLowerCase().includes("turkish") &&
+    translatedInput.toLocaleLowerCase().includes("greek") &&
+    translatedInput.toLocaleLowerCase().includes("or") &&
+    translatedInput.toLowerCase().includes("coffee")
+  ) {
+    return await translate(
+      "It is indeed Turkish Coffee%AA I cite the unesco declaration of it's inclusion under the Representative List of the Intangible Cultural Heritage of Humanity%AAYou may view the Unesco citation for more information.%AAhttps://ich.unesco.org/en/decisions/8.COM/8.28",
+      lang
+    );
+  }
   let data = await googleScrape(input);
 
   if (Array.isArray(data)) {

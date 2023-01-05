@@ -142,7 +142,7 @@ function App() {
 
   useEffect(() => {
     setVoice(validLanguages[language]);
-  }, [language]);
+  }, [language, validLanguages]);
 
   async function fetchResponse(query: string) {
     if (query !== "") {
@@ -197,7 +197,10 @@ function App() {
 
         <AlwaysListening
           listeningForOtherInput={
-            loading || settingsOpen || !isAlwaysListeningAllowed
+            loading ||
+            settingsOpen ||
+            !isAlwaysListeningAllowed ||
+            !firstInteraction
               ? true
               : listening
           }
