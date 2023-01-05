@@ -9,6 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 import os
 from grab_recipe import getRandomRecipe
+from translate import translate
 
 
 app = FastAPI()
@@ -38,6 +39,12 @@ async def google(query):
 @app.get("/api/recipe/")
 async def recipe():
     return json.dumps(getRandomRecipe())
+
+
+@app.get("/api/translate/{query}")
+async def trans(query):
+    data = query.split("%")
+    return json.dumps(translate(data[0], data[1]))
 
 
 def start_server():

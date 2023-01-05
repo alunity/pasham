@@ -86,6 +86,12 @@ async function getWeather() {
   return output;
 }
 
+function getRandomElement(arr: Array<any>) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+const failureMessages = ["Sorry, I don't understand"];
+
 async function getResponse(input: string): Promise<string> {
   if (input.includes("joke")) {
     return await getJoke();
@@ -108,7 +114,7 @@ async function getResponse(input: string): Promise<string> {
   } else if (typeof data == "string") {
     return data;
   } else {
-    return "NULL";
+    return getRandomElement(failureMessages);
   }
 }
 
