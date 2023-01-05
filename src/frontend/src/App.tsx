@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import AlwaysListening from "./alwaysListening";
 import getResponse from "./api";
 import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.min.js";
+import Settings from "./setting";
 import Microphone from "./speechRecognition";
 
 const synth = window.speechSynthesis;
@@ -27,6 +30,15 @@ function App() {
 
   let [voices, setVoices] = useState(synth.getVoices());
   let [selectedVoice, setVoice] = useState(voices[0]);
+  let [validLanguages, setValidLanguages] = useState<ilanguages>({});
+
+  let [isAlwaysListeningAllowed, setIsAlwaysListeningAllowed] = useState(true);
+
+  interface ilanguages {
+    [index: string]: SpeechSynthesisVoice;
+  }
+
+  let [settingsOpen, setSettingsOpen] = useState(false);
 
   function handleSpeechInput(text: string, final: boolean) {
     window.scrollTo(0, document.body.scrollHeight);
@@ -109,24 +121,25 @@ function App() {
   }, [loading]);
 
   useEffect(() => {
-    let set = false;
+    let languages: ilanguages = {};
+
     for (let i = 0; i < voices.length; i++) {
-      if (voices[i].localService && voices[i].lang == language) {
-        set = true;
-        setVoice(voices[i]);
-        break;
+      if (!(voices[i].lang in languages)) {
+        languages[voices[i].lang] = voices[i];
+      } else if (
+        languages[voices[i].lang].localService === false &&
+        voices[i].localService
+      ) {
+        languages[voices[i].lang] = voices[i];
       }
     }
-    if (!set) {
-      for (let i = 0; i < voices.length; i++) {
-        if (voices[i].lang == language) {
-          set = true;
-          setVoice(voices[i]);
-          break;
-        }
-      }
-    }
+    setValidLanguages(languages);
+    setVoice(languages[language]);
   }, [voices]);
+
+  useEffect(() => {
+    setVoice(validLanguages[language]);
+  }, [language]);
 
   async function fetchResponse(query: string) {
     if (query !== "") {
@@ -167,7 +180,7 @@ function App() {
   });
 
   return (
-    <div className="container-sm center noScrollbar">
+    <div className={"container-sm center noScrollbar"}>
       <div className="row fixedPosition pt-3 colour0">
         <h1 className="gotham-bold">PASHAM</h1>
         <Microphone
@@ -180,7 +193,11 @@ function App() {
         />
 
         <AlwaysListening
-          listeningForOtherInput={loading ? false : listening}
+          listeningForOtherInput={
+            loading || settingsOpen || !isAlwaysListeningAllowed
+              ? true
+              : listening
+          }
           callback={() => handleKeyWord()}
         />
       </div>
@@ -210,9 +227,26 @@ function App() {
         </div>
       </div>
       <i
-        className={"gg-mic bottom-left" + (listening ? " mic-active" : "")}
+        className={
+          "gg-mic glow bottom-right" + (listening ? " mic-active" : "")
+        }
         onClick={() => setListening(loading ? false : !listening)}
       ></i>
+      <i
+        className="gg-menu-round bottom-left glow"
+        onClick={() => setSettingsOpen(true)}
+      ></i>
+      <Settings
+        open={settingsOpen}
+        setOpen={(value: boolean) => setSettingsOpen(value)}
+        languages={validLanguages}
+        setLanguage={(language: string) => setLanguage(language)}
+        language={language}
+        isAlwaysListeningAllowed={isAlwaysListeningAllowed}
+        setIsAlwaysListeningAllowed={(value: boolean) =>
+          setIsAlwaysListeningAllowed(value)
+        }
+      />
     </div>
   );
 }

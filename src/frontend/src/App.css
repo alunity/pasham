@@ -19,6 +19,10 @@ body {
   color: black;
 }
 
+.white-text {
+  color: white !important;
+}
+
 .center {
   text-align: center !important;
 }
@@ -68,6 +72,11 @@ body {
 
 .bottom-left {
   position: fixed;
+  left: 2em;
+  bottom: 2em;
+}
+.bottom-right {
+  position: fixed;
   right: 2em;
   bottom: 2em;
 }
@@ -101,7 +110,7 @@ body {
   left: 0;
   right: 0;
   margin: 0 auto;
-  z-index: 6;
+  z-index: 4;
 }
 
 .offset {
@@ -115,4 +124,25 @@ body {
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+.black {
+  --bs-modal-bg: #212529 !important;
+}
+
+.glow {
+  opacity: 0.7;
+  transition: 0.25s;
+}
+
+.glow:hover {
+  opacity: 1 !important;
+}
+
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
 }
