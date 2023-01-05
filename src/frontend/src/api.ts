@@ -127,6 +127,15 @@ function getRandomElement(arr: Array<any>) {
 const understandingFailureMessages = ["Sorry, I don't understand"];
 const apiFailureMessages = ["Sorry, an error has occured"];
 
+function getHappyBirthday() {
+  let name = localStorage.name;
+
+  if (name == undefined) {
+    name = "";
+  }
+  return `Happy Birthday to You%AAHappy Birthday to You%AAHappy Birthday Dear ${name}%AAHappy Birthday to You`;
+}
+
 async function getResponse(input: string, lang: string): Promise<string> {
   lang = lang.split("-")[0];
 
@@ -151,6 +160,14 @@ async function getResponse(input: string, lang: string): Promise<string> {
       lang
     );
   }
+
+  if (
+    translatedInput.toLocaleLowerCase().includes("happy") &&
+    translatedInput.toLocaleLowerCase().includes("birthday")
+  ) {
+    return await translate(getHappyBirthday(), lang);
+  }
+
   let data = await googleScrape(input);
 
   if (Array.isArray(data)) {
@@ -168,4 +185,4 @@ async function getResponse(input: string, lang: string): Promise<string> {
   }
 }
 
-export default getResponse;
+export { getResponse, translate };

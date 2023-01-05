@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import AlwaysListening from "./alwaysListening";
-import getResponse from "./api";
+import { getResponse, translate } from "./api";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
@@ -89,7 +89,7 @@ function App() {
         setName(text);
         saveName(text);
         setLoading(true);
-        setResponse(`${getRandomElement(greetings)}, ${text}`);
+        forceSetResponse(`${getRandomElement(greetings)}, ${text}`);
         setFirstMessage(true);
       } else {
         setLoading(true);
@@ -98,6 +98,10 @@ function App() {
     } else {
       setSpeechInput(text);
     }
+  }
+
+  async function forceSetResponse(text: string) {
+    setResponse(await translate(text, language));
   }
 
   useEffect(() => {
