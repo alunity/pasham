@@ -107,7 +107,7 @@ function Settings(props: Iprops) {
               <br></br>
               <br></br>
               <p>
-                <span className="float-left">Reset name:</span>
+                <span className="float-left">Reset name and language:</span>
                 <button
                   className="btn btn-danger float-right"
                   onClick={() => {

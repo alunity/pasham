@@ -20,7 +20,7 @@ function App() {
     user: boolean;
   }
   // let [language, setLanguage] = useState("en-GB");
-  let [language, setLanguage] = useState("en-GB");
+  let [language, setLanguage] = useState(getLanguage());
 
   let [history, setHistory] = useState<Array<historyNodes>>();
 
@@ -58,6 +58,20 @@ function App() {
 
   function saveName(name: string) {
     localStorage.name = name;
+  }
+
+  function getLanguage() {
+    let language = localStorage.lang;
+
+    if (language === undefined) {
+      return "en-GB";
+    } else {
+      return language;
+    }
+  }
+
+  function saveLanguage(lang: string) {
+    localStorage.lang = lang;
   }
 
   const greetings = [
@@ -101,15 +115,15 @@ function App() {
   }
 
   async function forceSetResponse(text: string) {
-    setResponse(await translate(text, language));
+    setResponse(await translate(text, language.split("-")[0]));
   }
 
   useEffect(() => {
     if (!loading && name == "" && firstInteractionUser) {
-      setResponse("Hello%AAWhat is your name?");
+      forceSetResponse("Hello%AAWhat is your name?");
     } else if (!loading && firstInteractionUser) {
       setLoading(true);
-      setResponse(`${getRandomElement(greetings)}, ${name}`);
+      forceSetResponse(`${getRandomElement(greetings)}, ${name}`);
     }
   }, [firstInteractionUser]);
 
@@ -206,6 +220,7 @@ function App() {
 
   useEffect(() => {
     setVoice(validLanguages[language]);
+    saveLanguage(language);
   }, [language, validLanguages]);
 
   async function fetchResponse(query: string) {
