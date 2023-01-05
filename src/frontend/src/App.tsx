@@ -35,13 +35,46 @@ function App() {
 
   let [isAlwaysListeningAllowed, setIsAlwaysListeningAllowed] = useState(true);
 
+  let [name, setName] = useState(getName());
+
   interface ilanguages {
     [index: string]: SpeechSynthesisVoice;
   }
 
   let [settingsOpen, setSettingsOpen] = useState(false);
 
-  let [firstInteraction, setFirstInteraction] = useState(false);
+  let [firstInteractionUser, setFirstInteractionUser] = useState(false);
+  let [firstMessage, setFirstMessage] = useState(false);
+
+  function getName() {
+    let name = localStorage.name;
+
+    if (name === undefined) {
+      return "";
+    } else {
+      return name;
+    }
+  }
+
+  function saveName(name: string) {
+    localStorage.name = name;
+  }
+
+  const greetings = [
+    "Hi",
+    "Hello",
+    "What's up?",
+    "Good to see you",
+    "Nice to see you",
+    "Long time no see",
+    "Welcome",
+    "Greetings",
+    "Salutations",
+  ];
+
+  function getRandomElement(arr: Array<any>) {
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
 
   function handleSpeechInput(text: string, final: boolean) {
     window.scrollTo(0, document.body.scrollHeight);
@@ -52,12 +85,29 @@ function App() {
       } else {
         setHistory([...history, { text: text, user: true }]);
       }
-      setLoading(true);
-      fetchResponse(text);
+      if (name === "") {
+        setName(text);
+        saveName(text);
+        setLoading(true);
+        setResponse(`${getRandomElement(greetings)}, ${text}`);
+        setFirstMessage(true);
+      } else {
+        setLoading(true);
+        fetchResponse(text);
+      }
     } else {
       setSpeechInput(text);
     }
   }
+
+  useEffect(() => {
+    if (!loading && name == "" && firstInteractionUser) {
+      setResponse("Hello%AAWhat is your name?");
+    } else if (!loading && firstInteractionUser) {
+      setLoading(true);
+      setResponse(`${getRandomElement(greetings)}, ${name}`);
+    }
+  }, [firstInteractionUser]);
 
   function removeEmojis(input: string) {
     return input.replace(
@@ -100,6 +150,16 @@ function App() {
         utterance.voice = selectedVoice;
         synth.speak(utterance);
         setLoading(false);
+
+        if (name === "") {
+          let timeToSay =
+            (response.replace(/\s/g, "").length / 10) * 1000 + 500;
+          setTimeout(() => {
+            setListening(true);
+          }, timeToSay);
+        }
+
+        setFirstMessage(true);
 
         if (history === undefined) {
           setHistory([{ text: response, user: false }]);
@@ -200,7 +260,9 @@ function App() {
             loading ||
             settingsOpen ||
             !isAlwaysListeningAllowed ||
-            !firstInteraction
+            !firstInteractionUser ||
+            name === "" ||
+            !firstMessage
               ? true
               : listening
           }
@@ -253,9 +315,11 @@ function App() {
           setIsAlwaysListeningAllowed(value)
         }
       />
-      {!firstInteraction && (
+      {!firstInteractionUser && (
         <StartUp
-          setFirstInteraction={(value: boolean) => setFirstInteraction(value)}
+          setFirstInteraction={(value: boolean) =>
+            setFirstInteractionUser(value)
+          }
         />
       )}
     </div>

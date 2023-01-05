@@ -60,13 +60,18 @@ function AlwaysListening(props: iProps) {
     };
 
     window.onblur = () => {
+      console.log("here");
       if (listening.current) {
+        console.log("aand here");
         listening.current = false;
         recognition.stop();
       }
     };
-
-    recognition;
+    return () => {
+      recognition.onend = () => {};
+      window.onfocus = () => {};
+      window.onblur = () => {};
+    };
   }, []);
 
   useEffect(() => {
