@@ -104,6 +104,20 @@ function Settings(props: Iprops) {
                   type={"checkbox"}
                 ></input>
               </p>
+              <br></br>
+              <br></br>
+              <p>
+                <span className="float-left">Reset name:</span>
+                <button
+                  className="btn btn-danger float-right"
+                  onClick={() => {
+                    localStorage.clear();
+                    location.reload();
+                  }}
+                >
+                  Reset
+                </button>
+              </p>
             </div>
             <div className="modal-footer">
               <button

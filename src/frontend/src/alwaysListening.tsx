@@ -18,7 +18,8 @@ const keywords = ["pasham", "pasha", "passion", "pacha"];
 
 function AlwaysListening(props: iProps) {
   let [recognition, setRecognition] = useState(new SpeechRecognition());
-  let listening = useRef(false);
+  // let listening = useRef(false);
+  let [listening, setListening] = useState(false);
 
   useEffect(() => {
     recognition.continuous = true;
@@ -47,23 +48,21 @@ function AlwaysListening(props: iProps) {
     };
 
     recognition.onend = () => {
-      if (!props.listeningForOtherInput && listening.current) {
+      if (!props.listeningForOtherInput && listening) {
         recognition.start();
       }
     };
 
     window.onfocus = () => {
-      if (!listening.current && !props.listeningForOtherInput) {
-        listening.current = true;
+      if (!listening && !props.listeningForOtherInput) {
+        setListening(true);
         recognition.start();
       }
     };
 
     window.onblur = () => {
-      console.log("here");
-      if (listening.current) {
-        console.log("aand here");
-        listening.current = false;
+      if (listening) {
+        setListening(false);
         recognition.stop();
       }
     };
@@ -72,15 +71,15 @@ function AlwaysListening(props: iProps) {
       window.onfocus = () => {};
       window.onblur = () => {};
     };
-  }, []);
+  }, [listening]);
 
   useEffect(() => {
-    if (props.listeningForOtherInput && listening.current) {
+    if (props.listeningForOtherInput && listening) {
       recognition.stop();
-      listening.current = false;
-    } else if (!props.listeningForOtherInput && !listening.current) {
+      setListening(false);
+    } else if (!props.listeningForOtherInput && !listening) {
       recognition.start();
-      listening.current = true;
+      setListening(true);
     }
   }, [props.listeningForOtherInput]);
 
