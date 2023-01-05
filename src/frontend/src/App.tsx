@@ -15,6 +15,8 @@ function App() {
     text: string;
     user: boolean;
   }
+  // let [language, setLanguage] = useState("en-GB");
+  let [language, setLanguage] = useState("en-GB");
 
   let [history, setHistory] = useState<Array<historyNodes>>();
 
@@ -24,8 +26,7 @@ function App() {
   let [loading, setLoading] = useState(false);
 
   let [voices, setVoices] = useState(synth.getVoices());
-
-  let selectedVoice = voices[0];
+  let [selectedVoice, setVoice] = useState(voices[0]);
 
   function handleSpeechInput(text: string, final: boolean) {
     window.scrollTo(0, document.body.scrollHeight);
@@ -108,17 +109,28 @@ function App() {
   }, [loading]);
 
   useEffect(() => {
+    let set = false;
     for (let i = 0; i < voices.length; i++) {
-      if (voices[i].localService) {
-        selectedVoice = voices[i];
+      if (voices[i].localService && voices[i].lang == language) {
+        set = true;
+        setVoice(voices[i]);
         break;
+      }
+    }
+    if (!set) {
+      for (let i = 0; i < voices.length; i++) {
+        if (voices[i].lang == language) {
+          set = true;
+          setVoice(voices[i]);
+          break;
+        }
       }
     }
   }, [voices]);
 
   async function fetchResponse(query: string) {
     if (query !== "") {
-      setResponse(await getResponse(query));
+      setResponse(await getResponse(query, language));
     }
   }
 
@@ -159,6 +171,7 @@ function App() {
       <div className="row fixedPosition pt-3 colour0">
         <h1 className="gotham-bold">PASHAM</h1>
         <Microphone
+          language={language}
           callback={(text: string, final: boolean) =>
             handleSpeechInput(text, final)
           }

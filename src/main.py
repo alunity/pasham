@@ -10,6 +10,7 @@ from fastapi.responses import HTMLResponse
 import os
 from grab_recipe import getRandomRecipe
 from translate import translate
+from pydantic import BaseModel
 
 
 app = FastAPI()
@@ -41,10 +42,17 @@ async def recipe():
     return json.dumps(getRandomRecipe())
 
 
-@app.get("/api/translate/{query}")
-async def trans(query):
-    data = query.split("%")
-    return json.dumps(translate(data[0], data[1]))
+class TranslationQuery(BaseModel):
+    text: str
+    lang: str
+
+
+@app.post("/api/translate/")
+async def trans(query: TranslationQuery):
+    if query.text.isnumeric():
+        return query.text
+
+    return translate(query.text, query.lang)
 
 
 def start_server():

@@ -13,6 +13,7 @@ interface iProps {
   callback: Function;
   listening: boolean;
   setListening: Function;
+  language: string;
 }
 
 function Microphone(props: iProps) {
@@ -21,7 +22,7 @@ function Microphone(props: iProps) {
   useEffect(() => {
     // let recognition = new SpeechRecognition();
     recognition.continuous = true;
-    recognition.lang = "en-US";
+    recognition.lang = props.language;
     recognition.interimResults = true;
 
     if (props.listening === true) {
