@@ -8,6 +8,7 @@ from selenium.common.exceptions import NoSuchElementException
 
 def scrape_google(query):
     x = "%20".join(query.split(" "))
+    x = x.replace("+", "%2B")
 
     options = Options()
     options.headless = True
