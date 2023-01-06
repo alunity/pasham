@@ -2,7 +2,7 @@
 
 ## Architecture
 
-<img src="./assets/architecture.png">
+<img src="../assets/architecture.png">
 
 - When we were deciding our architecure it seemed obvious that this problem could be split up into two parts
 - It was easy to wrap the input, process, output model to this task
