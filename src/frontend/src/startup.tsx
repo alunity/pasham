@@ -6,7 +6,7 @@ interface iProps {
 }
 
 function StartUp(props: iProps) {
-  const modalElement = useRef();
+  const modalElement = useRef<HTMLDivElement>(null);
   const opened = useRef(false);
 
   useEffect(() => {

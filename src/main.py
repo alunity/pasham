@@ -13,7 +13,9 @@ from translate import translate
 from pydantic import BaseModel
 
 
-app = FastAPI()
+app = FastAPI(
+    title="pasham"
+)
 
 app.add_middleware(
     CORSMiddleware,
@@ -58,9 +60,10 @@ async def trans(query: TranslationQuery):
 def start_server():
     webbrowser.open("http://127.0.0.1:1002/pasham")
     uvicorn.run("main:app",
+                host="127.0.0.1",
                 port=1002,
-                log_level="info",
-                reload=True
+                log_level="critical",
+                # reload=True
                 )
 
 

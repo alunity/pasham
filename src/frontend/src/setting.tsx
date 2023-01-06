@@ -13,7 +13,7 @@ interface Iprops {
 
 function Settings(props: Iprops) {
   let [modal, setModal] = useState(null);
-  let modalElement = useRef();
+  let modalElement = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (modalElement.current !== null) {
