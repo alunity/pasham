@@ -32,6 +32,16 @@ async function getJoke() {
   }
 }
 
+function getTime() {
+  let d = new Date();
+  return `The time is ${d.toLocaleTimeString()}`;
+}
+
+function getDate() {
+  let d = new Date();
+  return `The date is ${d.toLocaleDateString()}`;
+}
+
 async function getRecipe() {
   try {
     let response = await fetch("http://127.0.0.1:1002/api/recipe/");
@@ -57,6 +67,22 @@ async function getRecipe() {
   } catch {
     return getRandomElement(apiFailureMessages) + ". Code: 3";
   }
+}
+
+const greetings = [
+  "Hi",
+  "Hello",
+  "What's up?",
+  "Good to see you",
+  "Nice to see you",
+  "Long time no see",
+  "Welcome",
+  "Greetings",
+  "Salutations",
+];
+
+function greet() {
+  return `${getRandomElement(greetings)}, ${localStorage.name}`;
 }
 
 async function getWeather() {
@@ -166,6 +192,32 @@ async function getResponse(input: string, lang: string): Promise<string> {
     translatedInput.toLocaleLowerCase().includes("birthday")
   ) {
     return await translate(getHappyBirthday(), lang);
+  }
+
+  if (
+    (translatedInput.toLocaleLowerCase().includes("hello") ||
+      translatedInput.toLocaleLowerCase().includes("hi")) &&
+    !(
+      translatedInput.toLocaleLowerCase().includes("definition") ||
+      translatedInput.toLocaleLowerCase().includes("mean") ||
+      translatedInput.toLocaleLowerCase().includes("what")
+    )
+  ) {
+    return await translate(greet(), lang);
+  }
+
+  if (
+    translatedInput.toLocaleLowerCase().includes("time") &&
+    translatedInput.toLocaleLowerCase().includes("what")
+  ) {
+    return translate(getTime(), lang);
+  }
+
+  if (
+    translatedInput.toLocaleLowerCase().includes("date") &&
+    translatedInput.toLocaleLowerCase().includes("what")
+  ) {
+    return translate(getDate(), lang);
   }
 
   let data = await googleScrape(input);

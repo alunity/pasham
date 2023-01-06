@@ -14,7 +14,7 @@ interface iProps {
   callback: Function;
 }
 
-const keywords = ["pasham", "pasha", "passion", "pacha"];
+const keywords = ["pasham", "pasha", "passion", "pacha", "pressure"];
 
 function AlwaysListening(props: iProps) {
   let [recognition, setRecognition] = useState(new SpeechRecognition());
