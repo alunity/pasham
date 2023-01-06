@@ -4,7 +4,7 @@
 // 1: Google scrape
 // 2: Joke
 // 3: Recipe
-// 4:
+// 4: Weather
 
 async function googleScrape(query: string) {
   try {
