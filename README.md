@@ -13,3 +13,5 @@
 ## Documentation
 
 [Design of the Program](/docs/design.md)
+
+[Find out how to run the program here](/docs/run.md)
