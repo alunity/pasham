@@ -8,12 +8,12 @@
 
 async function googleScrape(query: string) {
   try {
-    let ending = query.replace("/", "%Z1");
-    ending = encodeURIComponent(ending);
-    // ending = ending.replace("/", "%2F");
-    let response = await fetch("http://127.0.0.1:1002/api/google/" + ending);
+    let response = await fetch(`http://127.0.0.1:1002/api/google/`, {
+      body: JSON.stringify({ text: query }),
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    });
     response = JSON.parse(await response.json());
-
     return response;
   } catch {
     return getRandomElement(apiFailureMessages) + ". Code: 1";
@@ -200,23 +200,19 @@ async function getResponse(input: string, lang: string): Promise<string> {
     !(
       translatedInput.toLocaleLowerCase().includes("definition") ||
       translatedInput.toLocaleLowerCase().includes("mean") ||
-      translatedInput.toLocaleLowerCase().includes("what")
+      translatedInput.toLocaleLowerCase().includes("what") ||
+      translatedInput.toLocaleLowerCase().includes("who") ||
+      translatedInput.toLocaleLowerCase().includes("was")
     )
   ) {
     return await translate(greet(), lang);
   }
 
-  if (
-    translatedInput.toLocaleLowerCase().includes("time") &&
-    translatedInput.toLocaleLowerCase().includes("what")
-  ) {
+  if (translatedInput.toLocaleLowerCase().includes("what is the time")) {
     return translate(getTime(), lang);
   }
 
-  if (
-    translatedInput.toLocaleLowerCase().includes("date") &&
-    translatedInput.toLocaleLowerCase().includes("what")
-  ) {
+  if (translatedInput.toLocaleLowerCase().includes("what is the date")) {
     return translate(getDate(), lang);
   }
 

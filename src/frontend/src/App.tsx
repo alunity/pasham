@@ -216,6 +216,15 @@ function App() {
     }
     setValidLanguages(languages);
     setVoice(languages[language]);
+
+    let timeout = setTimeout(() => {
+      try {
+        if (!selectedVoice.localService) {
+          setVoices(synth.getVoices());
+        }
+      } catch {}
+    });
+    return () => clearTimeout(timeout);
   }, [voices]);
 
   useEffect(() => {

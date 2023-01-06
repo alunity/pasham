@@ -29,13 +29,13 @@ static_dir = os.path.join(os.path.dirname(__file__), "static")
 app.mount("/pasham", StaticFiles(directory=static_dir, html=True), name="static")
 
 
-@app.get("/api/google/{query}")
-async def google(query):
-    query = query.replace("+", "%2B")
+class GoogleQuery(BaseModel):
+    text: str
 
-    # %Z1 = / (epic encoding)
-    query = query.replace("%Z1", "/")
-    data = json.dumps(scrape_google(query))
+
+@app.post("/api/google/")
+async def google(query: GoogleQuery):
+    data = json.dumps(scrape_google(query.text))
     return {data}
 
 
@@ -63,7 +63,7 @@ def start_server():
                 host="127.0.0.1",
                 port=1002,
                 log_level="critical",
-                # reload=True
+                reload=False
                 )
 
 
