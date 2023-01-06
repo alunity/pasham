@@ -36,7 +36,7 @@
 
 ## Troubleshooting
 
-- If you run `python main.py` and your browser opens to an error/there is an error when navigating to the corerct address there are a few steps you can take
+- If you run `python main.py` and your browser opens to an error/there is an error when navigating to the correct address there are a few steps you can take
   - Stops any applications that are hosting at local host
-  - If on Mac OS or Linux run the application as a superuser `sudo python main.py`
+  - If you are using Mac OS or Linux try running the application as a superuser `sudo python main.py`
 - If you get error codes from within the application itself check that main.py is still running
