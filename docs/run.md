@@ -13,7 +13,7 @@
 
    - Alternately clone the repository. `pasham.zip` is just the `src` folder of the repository with everything not necessary for running the application taken out
 
-2. Open the folder you just extracted in a shell/command line of you choice.
+2. Open the folder you just extracted in a shell/command line of you choice and enter the pasham directory by running `cd pasham`
 
    - The next step involves installing many dependencies. I highly recommend that you make a virtual environment at this point and enter it to install the dependencies and keep you base python clean
    - If you don't have virtualenv installed, install it by running `pip install virtualenv`
