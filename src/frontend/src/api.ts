@@ -39,7 +39,7 @@ function getTime() {
 
 function getDate() {
   let d = new Date();
-  return `The date is ${d.toLocaleDateString()}`;
+  return `The date is ${d.toLocaleDateString("en-UK")}`;
 }
 
 async function getRecipe() {

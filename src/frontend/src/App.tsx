@@ -19,7 +19,7 @@ function App() {
     text: string;
     user: boolean;
   }
-  // let [language, setLanguage] = useState("en-GB");
+
   let [language, setLanguage] = useState(getLanguage());
 
   let [history, setHistory] = useState<Array<historyNodes>>();
@@ -74,22 +74,6 @@ function App() {
     localStorage.lang = lang;
   }
 
-  const greetings = [
-    "Hi",
-    "Hello",
-    "What's up?",
-    "Good to see you",
-    "Nice to see you",
-    "Long time no see",
-    "Welcome",
-    "Greetings",
-    "Salutations",
-  ];
-
-  function getRandomElement(arr: Array<any>) {
-    return arr[Math.floor(Math.random() * arr.length)];
-  }
-
   function handleSpeechInput(text: string, final: boolean) {
     window.scrollTo(0, document.body.scrollHeight);
     if (final) {
@@ -103,7 +87,8 @@ function App() {
         setName(text);
         saveName(text);
         setLoading(true);
-        forceSetResponse(`${getRandomElement(greetings)}, ${text}`);
+        // forceSetResponse(`${getRandomElement(greetings)}, ${text}`);
+        fetchResponse("hello");
         setFirstMessage(true);
       } else {
         setLoading(true);
@@ -123,7 +108,7 @@ function App() {
       forceSetResponse("Hello%AAWhat is your name?");
     } else if (!loading && firstInteractionUser) {
       setLoading(true);
-      forceSetResponse(`${getRandomElement(greetings)}, ${name}`);
+      fetchResponse("hello");
     }
   }, [firstInteractionUser]);
 

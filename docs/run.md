@@ -11,8 +11,6 @@
 
 1. Download `pasham.zip` from [releases](https://github.com/BethsGrammar/22-23_computing_competition-cr00sing/releases/latest) and extract it
 
-   - Alternately clone the repository. `pasham.zip` is just the `src` folder of the repository with everything not necessary for running the application taken out
-
 2. Open the folder you just extracted in a shell/command line of you choice and enter the pasham directory by running `cd pasham`
 
    - The next step involves installing many dependencies. I highly recommend that you make a virtual environment at this point and enter it to install the dependencies and keep you base python clean
