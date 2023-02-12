@@ -2,9 +2,13 @@
 
 # Pasham
 
+![](assets/image.png)
+
 <img src="./assets/coffee.svg" width=100 align="center"></img>
 
 </div>
+
+A voice activated virtual assistant, built in 4 days for a competition
 
 ## Source Code
 
